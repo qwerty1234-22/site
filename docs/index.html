@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Павел Шушпанников - Портфолио</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Сброс стилей и базовые настройки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+        }
+        
+        /* Контейнер */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка и навигация */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: #667eea;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        /* Главный раздел */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 20px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+        
+        /* Обо мне */
+        #about {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Портфолио */
+        #portfolio {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .portfolio-item-content {
+            padding: 25px;
+        }
+        
+        .portfolio-item h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .portfolio-item p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        /* Контакты */
+        #contact {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-details h3 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .contact-details a,
+        .contact-details a:hover {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: #667eea;
+        }
+        
+        .contact-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .submit-btn:hover {
+            background: #5568d3;
+        }
+        
+        /* Футер */
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            color: #667eea;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #667eea;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+        
+        /* Анимации */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-content {
+                padding: 40px;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 30px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка и навигация -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Павел Шушпанников</a>
+                <ul class="nav-links">
+                    <li><a href="#hero">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Главный раздел -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Павел Шушпанников</h1>
+            <p>Студент 1 курса ГУАП по специальности "Конструирование и технология электронных средств". Увлекаюсь современными технологиями, программированием и созданием инновационных решений в сфере электроники. Активно участвую в научных проектах и стремлюсь к постоянному развитию в области инженерного дела.</p>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Я Павел Шушпанников, студент первого курса ГУАП, обучаюсь по специальности "Конструирование и технология электронных средств". С детства увлекаюсь электроникой и программированием, что и привело меня к выбору этой профессии. В свободное время изучаю современные технологии, участвую в хакатонах и разрабатываю собственные проекты. Особенно интересуюсь встроенным программированием и созданием умных устройств. Стремлюсь к тому, чтобы мои знания и навыки приносили пользу обществу и помогали решать реальные проблемы. В текущем учебном году активно участвую в проекте по созданию системы автоматизации учебного процесса, где применяю свои знания в области разработки электронных схем и программного обеспечения. Также являюсь членом студенческого научного общества при ГУАП, где работаю над исследованием новых материалов для печатных плат.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Фото автора -->
+                    <img src="images/photo_2026-02-16%2000.15.24.jpeg" alt="Павел Шушпанников">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <!-- Каталог книг проект 1 -->
+                    <img src="images/7a63dc55-d675-4706-9561-f5206903aa6f_image.png" alt="Каталог книг - Проект 1">
+                    <div class="portfolio-item-content">
+                        <h3>Электронный каталог книг</h3>
+                        <p>Разработка интерфейса и базы данных для системы управления библиотекой с возможностью поиска по категориям, авторам и ключевым словам. Реализованы функции добавления новых книг, редактирования информации и отслеживания выданных экземпляров.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <!-- Каталог книг проект 2 -->
+                    <img src="images/251afe1d-4b44-41c0-aa4e-363f4fe0b4b3_Без%20названия%203.png" alt="Каталог книг - Проект 2">
+                    <div class="portfolio-item-content">
+                        <h3>Мобильное приложение для библиотеки</h3>
+                        <p>Создание мобильного приложения с адаптивным интерфейсом для поиска книг, бронирования и уведомлений о возвращении. Интеграция с системой распознавания штрих-кодов для упрощения процесса выдачи и возврата книг.</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <!-- Каталог книг проект 3 -->
+                    <img src="images/img.png" alt="Каталог книг - Проект 3">
+                    <div class="portfolio-item-content">
+                        <h3>Система рекомендаций для читателей</h3>
+                        <p>Разработка алгоритма рекомендаций на основе анализа предпочтений пользователей. Интеграция с социальными сетями для обмена отзывами и создания сообщества любителей книг.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Телефон</h3>
+                            <a href="tel:+79991234567">+7 (999) 123-45-67</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:pavel.shushpannikov@mail.ru">pavel.shushpannikov@mail.ru</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Адрес</h3>
+                            <p>г. Санкт-Петербург, ул. Большая Морская, д. 67</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Павел Шушпанников</h3>
+                    <p>Студент ГУАП, 1 курс</p>
+                    <p>Специальность: Конструирование и технология электронных средств</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Социальные сети</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://vk.com" target="_blank"><i class="fab fa-vk"></i></a></li>
+                        <li><a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a></li>
+                        <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="https://telegram.org" target="_blank"><i class="fab fa-telegram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Павел Шушпанников. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Плавная прокрутка к разделам
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Валидация формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                alert('Пожалуйста, введите корректный адрес электронной почты');
+                return;
+            }
+            
+            alert('Сообщение успешно отправлено!');
+            this.reset();
+        });
+        
+        // Мобильное меню
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', function(e) {
+            if (navLinks.style.display === 'flex' && 
+                !e.target.closest('.nav-links') && 
+                !e.target.closest('.hamburger')) {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
